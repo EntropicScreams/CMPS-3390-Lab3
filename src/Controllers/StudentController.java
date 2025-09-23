@@ -7,23 +7,18 @@ import Views.StudentGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentController {
     public StudentController (StudentData model, StudentGui view) {
-        try {
-            model.loadData();
+        ArrayList<Student> students = model.getStudents();
 
-            for (Student student : model.getStudents()) {
-                view.addStudent(student);
-            }
-        } catch (IOException e) {
-//            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-        }
+        students.forEach(s -> {
+           view.addStudent(s);
+        });
 
         view.setAddStudentListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 String firstName = view.getFirstName();
                 String lastName = view.getLastName();
@@ -37,12 +32,12 @@ public class StudentController {
 
                 model.addStudent(student);
 
-
-                try {
-                    model.saveData();
-                } catch (IOException ex) {
-//                    throw view.showError("FILE COULD **NOT** BE FOUND");
-                }
+//
+//                try {
+//                    model.saveData();
+//                } catch (IOException ex) {
+////                    throw view.showError("FILE COULD **NOT** BE FOUND");
+//                }
 
                 view.addStudent(student);
                 view.clearForm();
@@ -59,12 +54,12 @@ public class StudentController {
                 }
 
                 model.removeStudent(student);
-
-                try {
-                    model.saveData();
-                } catch (IOException ex) {
-//                    throw view.showError("FILE COULD **NOT** BE FOUND");
-                }
+//
+//                try {
+//                    model.saveData();
+//                } catch (IOException ex) {
+////                    throw view.showError("FILE COULD **NOT** BE FOUND");
+//                }
 
                 view.removeStudent(student);
             }

@@ -19,4 +19,15 @@ public class Student  implements Serializable {
 
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getStudentID() {
+        return studentID;
+    }
 }

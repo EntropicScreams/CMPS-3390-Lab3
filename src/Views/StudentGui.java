@@ -4,6 +4,7 @@ import Models.Student;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class StudentGui extends JFrame{
     private JPanel panel1;
@@ -48,6 +49,10 @@ public class StudentGui extends JFrame{
     public void addStudent(Student student) {
         studentData.addElement(student);
     }
+
+//    public void setStudentList(List<Student> students) {
+//        studentList = new List(students);
+//    }
 
     public void removeStudent(Student student) {
         studentData.removeElement(student);
