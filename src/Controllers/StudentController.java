@@ -7,6 +7,7 @@ import Views.StudentGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class StudentController {
         });
 
         view.setAddStudentListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String firstName = view.getFirstName();
                 String lastName = view.getLastName();
@@ -26,19 +28,17 @@ public class StudentController {
 
                 if(firstName.isBlank() || lastName.isBlank() || studentID.isBlank()) {
                     view.showError("FILL OUT **ALL** THE FIELDS!");
+                    return;
                 }
 
                 Student student = new Student(firstName, lastName, Integer.parseInt(studentID));
 
-                model.addStudent(student);
-
-//
-//                try {
-//                    model.saveData();
-//                } catch (IOException ex) {
-////                    throw view.showError("FILE COULD **NOT** BE FOUND");
-//                }
-
+                try {
+                    model.addStudent(student);
+                } catch (SQLException ex) {
+                    view.showError("Unable to add student **UNIQUE ENTRIES ONLY**");
+                    return;
+                }
                 view.addStudent(student);
                 view.clearForm();
             }

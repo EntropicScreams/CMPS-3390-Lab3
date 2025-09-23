@@ -13,7 +13,7 @@ public class DB {
                     CREATE TABLE IF NOT EXISTS Student(
                         firstName varchar(30),
                         lastName varchar(30),
-                        studentID int
+                        studentID int unique
                     )
                     """);
             stmt.close();

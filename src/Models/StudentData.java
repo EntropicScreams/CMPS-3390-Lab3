@@ -17,7 +17,7 @@ public class StudentData {
                     CREATE TABLE IF NOT EXISTS Student(
                         firstName varchar(30),
                         lastName varchar(30),
-                        studentID int
+                        studentID int unique
                     )
                     """);
             stmt.close();
@@ -26,8 +26,8 @@ public class StudentData {
         }
     }
 
-    public void addStudent(Student student) {
-        try (Connection conn = DriverManager.getConnection(db)) {
+    public void addStudent(Student student) throws SQLException {
+            Connection conn = DriverManager.getConnection(db);
             String query = "INSERT INTO Student (firstName, lastName, studentID) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
 
@@ -37,9 +37,6 @@ public class StudentData {
 
             ps.execute();
             ps.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
     public void removeStudent(Student student) {
